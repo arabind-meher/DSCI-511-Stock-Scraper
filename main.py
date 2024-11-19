@@ -5,9 +5,6 @@ from selenium import webdriver
 from stock_analysis import StockAnalysis
 
 if __name__ == "__main__":
-    if not os.path.exists("data"):
-        os.mkdir("data")
-
     firefox_options = webdriver.FirefoxOptions()
     firefox_options.add_argument("--headless")
     firefox_options.add_argument("-private")
@@ -16,6 +13,9 @@ if __name__ == "__main__":
 
     stock_scraper = StockAnalysis(browser)
     links = stock_scraper.get_snp500_list()
-    stock_df = stock_scraper.get_stock_data(links, action="save", directory="test_data")
+    # print(f"{links[0] = }")
+    stock_df = stock_scraper.get_stock_data(
+        links[:10], action="save", directory="test_data"
+    )
 
     browser.quit()

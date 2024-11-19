@@ -5,10 +5,10 @@ from tqdm import tqdm
 
 from pandas import DataFrame
 from selenium import webdriver
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-from utils import save_local
 from logger import Logs
 
 
@@ -37,7 +37,7 @@ class StockAnalysis:
         """Retrieve S&P 500 stock list from the webpage."""
 
         url = "https://stockanalysis.com/list/sp-500-stocks/"
-        self.load_driver(url)
+        self.load_driver(url, 1)
         self.file_logger.info("Fetching S&P 500 list.")
         self.console_logger.info("Fetching S&P 500 list.")
 
@@ -63,22 +63,21 @@ class StockAnalysis:
     def get_stock_data(self, urls: list, **kwargs) -> DataFrame | None:
         """Retrieve stock data for each URL in the provided list."""
 
-        action_options = {"return", "save"}
-
         directory: str = kwargs.get("directory", "data")
         filename: str = kwargs.get("filename", "stock")
-        action: str = kwargs.get("action", "return")
 
-        if action not in action_options:
-            raise ValueError(
-                f"Invalid value for action: `{action}`. Allowed values are `{action_options}`."
-            )
+        if not os.path.exists(directory):
+            os.mkdir(directory)
+
+        history_directory = os.path.join(directory, "stock_history")
+        if not os.path.exists(history_directory):
+            os.mkdir(history_directory)
 
         stock_list = list()
         for iter, url in tqdm(
             enumerate(urls, 1), desc="Processing urls", total=len(urls)
         ):
-            self.load_driver(url)
+            self.load_driver(url, 1)
             xpath = self.__get_xpath()
             stock_data = dict()
 
@@ -137,23 +136,83 @@ class StockAnalysis:
             stock_data["website"] = self.__scrap_text(xpath["website"])
 
             # Log to both the main log file and the console for this line
-            log_message = (
-                f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']}"
-            )
-            self.file_logger.info(log_message)
-            self.console_logger.info(log_message)
+            log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [Done]"
+            self.file_logger.info(log_msg)
+            self.console_logger.info(log_msg)
 
             stock_list.append(stock_data)
 
+            try:
+                time.sleep(1)
+                history_index = list(
+                    map(
+                        lambda x: x.text.strip(),
+                        self.driver.find_element(
+                            By.CLASS_NAME, "navmenu"
+                        ).find_elements(By.TAG_NAME, "li"),
+                    )
+                ).index("History")
+
+                self.driver.find_element(
+                    By.XPATH, xpath["history_page"] % str(history_index + 1)
+                ).click()
+
+                time.sleep(1)
+
+                # self.console_logger.info(f"{history_index = }")
+
+                # history_xpath = xpath["history_page"].format(str(history_index + 1))
+
+                history_thead = self.driver.find_element(
+                    By.XPATH, xpath["history_thead"]
+                )
+
+                history_tbody = self.driver.find_element(
+                    By.XPATH, xpath["history_tbody"]
+                )
+
+                stock_history = self.get_stock_history(history_thead, history_tbody)
+                stock_history.to_csv(
+                    os.path.join(history_directory, stock_data["symbol"] + ".csv"),
+                    index=False,
+                )
+
+                log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [History data saved]"
+                self.file_logger.info(log_msg)
+                self.console_logger.info(log_msg)
+            except NoSuchElementException:
+                log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [History not found]"
+                self.file_logger.info(log_msg)
+                self.console_logger.info(log_msg)
+
+        # converting list of stock dict to DataFrame
         stock_data_frame = DataFrame(stock_list)
 
-        if action == "return":
-            return stock_data_frame
+        # saving data frame as csv
+        stock_data_frame.to_csv(os.path.join(directory, filename + ".csv"), index=False)
+        self.file_logger.info(f"Data saved to {directory}/{filename}")
+        self.console_logger.info(f"Data saved to {directory}/{filename}")
 
-        if action == "save":
-            save_local(stock_data_frame, directory=directory, filename=filename)
-            self.file_logger.info(f"Data saved to {directory}/{filename}")
-            self.console_logger.info(f"Data saved to {directory}/{filename}")
+    def get_stock_history(self, thead: WebElement, tbody: WebElement) -> DataFrame:
+        columns = list(
+            map(
+                lambda col: col.text.strip().lower().replace(".", "").replace(" ", "_"),
+                thead.find_element(By.TAG_NAME, "tr").find_elements(By.TAG_NAME, "th"),
+            )
+        )
+
+        table_data = list()
+        for row in tbody.find_elements(By.TAG_NAME, "tr"):
+            table_data.append(
+                list(
+                    map(
+                        lambda row_data: row_data.text.strip(),
+                        row.find_elements(By.TAG_NAME, "td"),
+                    )
+                )
+            )
+
+        return DataFrame(table_data, columns=columns)
 
     def __scrap_text(self, xpath) -> str | None:
         try:
@@ -178,4 +237,7 @@ class StockAnalysis:
             "stock_exchange": "/html/body/div/div[1]/div[2]/main/div[3]/div[1]/div[1]/div/div[5]/span[2]",
             "employees": "/html/body/div/div[1]/div[2]/main/div[3]/div[1]/div[1]/div/div[4]/a",
             "website": "/html/body/div/div[1]/div[2]/main/div[3]/div[1]/div[1]/div/div[7]/a",
+            "history_page": "/html/body/div/div[1]/div[2]/main/div[1]/nav/ul/li[%s]/a",
+            "history_thead": "/html/body/div/div[1]/div[2]/main/div[2]/div[1]/div/div[2]/div[2]/table/thead",
+            "history_tbody": "/html/body/div/div[1]/div[2]/main/div[2]/div[1]/div/div[2]/div[2]/table/tbody",
         }
