@@ -5,18 +5,21 @@ from tqdm import tqdm
 
 from pandas import DataFrame
 from selenium import webdriver
-from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 from logger import Logs
 
 
-class StockAnalysis:
+class StockAnalysisScraper:
     """A class to perform stock data analysis using web scraping."""
 
     def __init__(self, driver: webdriver.Firefox) -> None:
         """Initialize the StockAnalysis class with a WebDriver and set up logging."""
+
         logs = Logs()
         self.file_logger = logs.get_file_logger("file_logger")
         self.console_logger = logs.get_console_logger("console_logger")
@@ -60,7 +63,7 @@ class StockAnalysis:
         )
         return links
 
-    def get_stock_data(self, urls: list, **kwargs) -> DataFrame | None:
+    def get_stock_data(self, urls: list, **kwargs) -> None:
         """Retrieve stock data for each URL in the provided list."""
 
         directory: str = kwargs.get("directory", "data")
@@ -80,8 +83,6 @@ class StockAnalysis:
             self.load_driver(url, 1)
             xpath = self.__get_xpath()
             stock_data = dict()
-
-            # Populate stock data with primary fields
 
             # Symbol
             stock_data["symbol"] = self.__scrap_text(xpath["symbol"])
@@ -136,54 +137,53 @@ class StockAnalysis:
             stock_data["website"] = self.__scrap_text(xpath["website"])
 
             # Log to both the main log file and the console for this line
-            log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [Done]"
+            log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [Found]"
             self.file_logger.info(log_msg)
             self.console_logger.info(log_msg)
 
             stock_list.append(stock_data)
 
             try:
-                time.sleep(1)
-                history_index = list(
-                    map(
-                        lambda x: x.text.strip(),
-                        self.driver.find_element(
-                            By.CLASS_NAME, "navmenu"
-                        ).find_elements(By.TAG_NAME, "li"),
-                    )
-                ).index("History")
+                navbar = self.driver.find_element(
+                    By.CLASS_NAME, "navmenu"
+                ).find_elements(By.TAG_NAME, "li")
 
-                self.driver.find_element(
-                    By.XPATH, xpath["history_page"] % str(history_index + 1)
-                ).click()
+                history_index = [col.text.strip() for col in navbar].index("History")
+                navbar[history_index].click()
 
-                time.sleep(1)
-
-                # self.console_logger.info(f"{history_index = }")
-
-                # history_xpath = xpath["history_page"].format(str(history_index + 1))
-
-                history_thead = self.driver.find_element(
-                    By.XPATH, xpath["history_thead"]
-                )
-
-                history_tbody = self.driver.find_element(
-                    By.XPATH, xpath["history_tbody"]
-                )
-
-                stock_history = self.get_stock_history(history_thead, history_tbody)
-                stock_history.to_csv(
-                    os.path.join(history_directory, stock_data["symbol"] + ".csv"),
-                    index=False,
-                )
-
-                log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [History data saved]"
-                self.file_logger.info(log_msg)
-                self.console_logger.info(log_msg)
             except NoSuchElementException:
-                log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [History not found]"
+                log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [History Not Found]"
                 self.file_logger.info(log_msg)
                 self.console_logger.info(log_msg)
+
+                continue
+
+            try:
+                history_table = WebDriverWait(self.driver, 10).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, "//table[contains(@class, 'svelte-2d4szo')]")
+                    )
+                )
+            except TimeoutException:
+                log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [History Not Found]"
+                self.file_logger.info(log_msg)
+                self.console_logger.info(log_msg)
+
+                continue
+
+            history_thead = history_table.find_element(By.TAG_NAME, "thead")
+
+            history_tbody = history_table.find_element(By.TAG_NAME, "tbody")
+
+            stock_history = self.get_stock_history(history_thead, history_tbody)
+            stock_history.to_csv(
+                os.path.join(history_directory, stock_data["symbol"] + ".csv"),
+                index=False,
+            )
+
+            log_msg = f"{str(iter):<{3}}: {stock_data['symbol']:<{6}} - {stock_data['name']} [History Saved]"
+            self.file_logger.info(log_msg)
+            self.console_logger.info(log_msg)
 
         # converting list of stock dict to DataFrame
         stock_data_frame = DataFrame(stock_list)
@@ -237,7 +237,18 @@ class StockAnalysis:
             "stock_exchange": "/html/body/div/div[1]/div[2]/main/div[3]/div[1]/div[1]/div/div[5]/span[2]",
             "employees": "/html/body/div/div[1]/div[2]/main/div[3]/div[1]/div[1]/div/div[4]/a",
             "website": "/html/body/div/div[1]/div[2]/main/div[3]/div[1]/div[1]/div/div[7]/a",
-            "history_page": "/html/body/div/div[1]/div[2]/main/div[1]/nav/ul/li[%s]/a",
-            "history_thead": "/html/body/div/div[1]/div[2]/main/div[2]/div[1]/div/div[2]/div[2]/table/thead",
-            "history_tbody": "/html/body/div/div[1]/div[2]/main/div[2]/div[1]/div/div[2]/div[2]/table/tbody",
         }
+
+
+def main():
+    firefox_options = webdriver.FirefoxOptions()
+    firefox_options.add_argument("--headless")
+    firefox_options.add_argument("--private")
+    browser = webdriver.Firefox(options=firefox_options)
+    browser.maximize_window()
+
+    stock_scraper = StockAnalysisScraper(browser)
+    links = stock_scraper.get_snp500_list()
+    stock_df = stock_scraper.get_stock_data(links[:50])
+
+    browser.quit()

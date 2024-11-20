@@ -1,35 +1,155 @@
-2024-11-19 17:29:55,907 - INFO - StockAnalysis initialized with WebDriver.
-2024-11-19 17:29:58,525 - INFO - Loaded URL: https://stockanalysis.com/list/sp-500-stocks/
-2024-11-19 17:29:59,526 - INFO - Fetching S&P 500 list.
-2024-11-19 17:30:03,034 - INFO - Retrieved 503 stock links from S&P 500 list.
-2024-11-19 17:30:03,664 - INFO - Loaded URL: https://stockanalysis.com/stocks/nvda/
-2024-11-19 17:30:05,135 - INFO - 1  : NVDA   - NVIDIA Corporation [Done]
-2024-11-19 17:30:13,468 - INFO - 1  : NVDA   - NVIDIA Corporation [History data saved]
-2024-11-19 17:30:13,870 - INFO - Loaded URL: https://stockanalysis.com/stocks/aapl/
-2024-11-19 17:30:15,299 - INFO - 2  : AAPL   - Apple Inc. [Done]
-2024-11-19 17:30:23,657 - INFO - 2  : AAPL   - Apple Inc. [History data saved]
-2024-11-19 17:30:24,088 - INFO - Loaded URL: https://stockanalysis.com/stocks/msft/
-2024-11-19 17:30:25,499 - INFO - 3  : MSFT   - Microsoft Corporation [Done]
-2024-11-19 17:30:27,848 - INFO - 3  : MSFT   - Microsoft Corporation [History not found]
-2024-11-19 17:30:28,190 - INFO - Loaded URL: https://stockanalysis.com/stocks/googl/
-2024-11-19 17:30:29,565 - INFO - 4  : GOOGL  - Alphabet Inc. [Done]
-2024-11-19 17:30:37,895 - INFO - 4  : GOOGL  - Alphabet Inc. [History data saved]
-2024-11-19 17:30:38,253 - INFO - Loaded URL: https://stockanalysis.com/stocks/goog/
-2024-11-19 17:30:39,635 - INFO - 5  : GOOG   - Alphabet Inc. [Done]
-2024-11-19 17:30:47,680 - INFO - 5  : GOOG   - Alphabet Inc. [History data saved]
-2024-11-19 17:30:47,986 - INFO - Loaded URL: https://stockanalysis.com/stocks/amzn/
-2024-11-19 17:30:49,358 - INFO - 6  : AMZN   - Amazon.com, Inc. [Done]
-2024-11-19 17:30:57,776 - INFO - 6  : AMZN   - Amazon.com, Inc. [History data saved]
-2024-11-19 17:30:58,202 - INFO - Loaded URL: https://stockanalysis.com/stocks/meta/
-2024-11-19 17:30:59,665 - INFO - 7  : META   - Meta Platforms, Inc. [Done]
-2024-11-19 17:31:07,804 - INFO - 7  : META   - Meta Platforms, Inc. [History data saved]
-2024-11-19 17:31:08,232 - INFO - Loaded URL: https://stockanalysis.com/stocks/tsla/
-2024-11-19 17:31:09,613 - INFO - 8  : TSLA   - Tesla, Inc. [Done]
-2024-11-19 17:31:19,182 - INFO - 8  : TSLA   - Tesla, Inc. [History data saved]
-2024-11-19 17:31:22,914 - INFO - Loaded URL: https://stockanalysis.com/stocks/brk.b/
-2024-11-19 17:31:24,383 - INFO - 9  : BRK.B  - Berkshire Hathaway Inc. [Done]
-2024-11-19 17:31:32,606 - INFO - 9  : BRK.B  - Berkshire Hathaway Inc. [History data saved]
-2024-11-19 17:31:32,981 - INFO - Loaded URL: https://stockanalysis.com/stocks/avgo/
-2024-11-19 17:31:34,387 - INFO - 10 : AVGO   - Broadcom Inc. [Done]
-2024-11-19 17:31:42,495 - INFO - 10 : AVGO   - Broadcom Inc. [History data saved]
-2024-11-19 17:31:42,502 - INFO - Data saved to test_data/stock
+2024-11-19 23:53:17,008 - INFO - StockAnalysis initialized with WebDriver.
+2024-11-19 23:53:18,216 - INFO - Loaded URL: https://stockanalysis.com/list/sp-500-stocks/
+2024-11-19 23:53:19,218 - INFO - Fetching S&P 500 list.
+2024-11-19 23:53:22,643 - INFO - Retrieved 503 stock links from S&P 500 list.
+2024-11-19 23:53:23,320 - INFO - Loaded URL: https://stockanalysis.com/stocks/nvda/
+2024-11-19 23:53:24,724 - INFO - 1  : NVDA   - NVIDIA Corporation [Found]
+2024-11-19 23:53:31,386 - INFO - 1  : NVDA   - NVIDIA Corporation [History Saved]
+2024-11-19 23:53:31,739 - INFO - Loaded URL: https://stockanalysis.com/stocks/aapl/
+2024-11-19 23:53:33,131 - INFO - 2  : AAPL   - Apple Inc. [Found]
+2024-11-19 23:53:40,184 - INFO - 2  : AAPL   - Apple Inc. [History Saved]
+2024-11-19 23:53:40,822 - INFO - Loaded URL: https://stockanalysis.com/stocks/msft/
+2024-11-19 23:53:42,199 - INFO - 3  : MSFT   - Microsoft Corporation [Found]
+2024-11-19 23:53:49,611 - INFO - 3  : MSFT   - Microsoft Corporation [History Saved]
+2024-11-19 23:53:50,135 - INFO - Loaded URL: https://stockanalysis.com/stocks/goog/
+2024-11-19 23:53:51,517 - INFO - 4  : GOOG   - Alphabet Inc. [Found]
+2024-11-19 23:53:58,735 - INFO - 4  : GOOG   - Alphabet Inc. [History Saved]
+2024-11-19 23:53:59,137 - INFO - Loaded URL: https://stockanalysis.com/stocks/googl/
+2024-11-19 23:54:00,568 - INFO - 5  : GOOGL  - Alphabet Inc. [Found]
+2024-11-19 23:54:07,180 - INFO - 5  : GOOGL  - Alphabet Inc. [History Saved]
+2024-11-19 23:54:07,484 - INFO - Loaded URL: https://stockanalysis.com/stocks/amzn/
+2024-11-19 23:54:08,885 - INFO - 6  : AMZN   - Amazon.com, Inc. [Found]
+2024-11-19 23:54:20,580 - INFO - 6  : AMZN   - Amazon.com, Inc. [History Saved]
+2024-11-19 23:54:20,905 - INFO - Loaded URL: https://stockanalysis.com/stocks/meta/
+2024-11-19 23:54:22,286 - INFO - 7  : META   - Meta Platforms, Inc. [Found]
+2024-11-19 23:54:29,224 - INFO - 7  : META   - Meta Platforms, Inc. [History Saved]
+2024-11-19 23:54:29,611 - INFO - Loaded URL: https://stockanalysis.com/stocks/tsla/
+2024-11-19 23:54:31,026 - INFO - 8  : TSLA   - Tesla, Inc. [Found]
+2024-11-19 23:54:37,730 - INFO - 8  : TSLA   - Tesla, Inc. [History Saved]
+2024-11-19 23:54:38,018 - INFO - Loaded URL: https://stockanalysis.com/stocks/brk.b/
+2024-11-19 23:54:39,484 - INFO - 9  : BRK.B  - Berkshire Hathaway Inc. [Found]
+2024-11-19 23:54:46,133 - INFO - 9  : BRK.B  - Berkshire Hathaway Inc. [History Saved]
+2024-11-19 23:54:46,512 - INFO - Loaded URL: https://stockanalysis.com/stocks/avgo/
+2024-11-19 23:54:47,904 - INFO - 10 : AVGO   - Broadcom Inc. [Found]
+2024-11-19 23:54:54,306 - INFO - 10 : AVGO   - Broadcom Inc. [History Saved]
+2024-11-19 23:54:54,832 - INFO - Loaded URL: https://stockanalysis.com/stocks/wmt/
+2024-11-19 23:54:56,356 - INFO - 11 : WMT    - Walmart Inc. [Found]
+2024-11-19 23:55:02,858 - INFO - 11 : WMT    - Walmart Inc. [History Saved]
+2024-11-19 23:55:03,358 - INFO - Loaded URL: https://stockanalysis.com/stocks/jpm/
+2024-11-19 23:55:04,746 - INFO - 12 : JPM    - JPMorgan Chase & Co. [Found]
+2024-11-19 23:55:11,388 - INFO - 12 : JPM    - JPMorgan Chase & Co. [History Saved]
+2024-11-19 23:55:11,701 - INFO - Loaded URL: https://stockanalysis.com/stocks/lly/
+2024-11-19 23:55:13,079 - INFO - 13 : LLY    - Eli Lilly and Company [Found]
+2024-11-19 23:55:19,545 - INFO - 13 : LLY    - Eli Lilly and Company [History Saved]
+2024-11-19 23:55:19,892 - INFO - Loaded URL: https://stockanalysis.com/stocks/v/
+2024-11-19 23:55:21,265 - INFO - 14 : V      - Visa Inc. [Found]
+2024-11-19 23:55:28,170 - INFO - 14 : V      - Visa Inc. [History Saved]
+2024-11-19 23:55:28,638 - INFO - Loaded URL: https://stockanalysis.com/stocks/unh/
+2024-11-19 23:55:30,138 - INFO - 15 : UNH    - UnitedHealth Group Incorporated [Found]
+2024-11-19 23:55:36,747 - INFO - 15 : UNH    - UnitedHealth Group Incorporated [History Saved]
+2024-11-19 23:55:37,143 - INFO - Loaded URL: https://stockanalysis.com/stocks/orcl/
+2024-11-19 23:55:38,537 - INFO - 16 : ORCL   - Oracle Corporation [Found]
+2024-11-19 23:55:45,446 - INFO - 16 : ORCL   - Oracle Corporation [History Saved]
+2024-11-19 23:55:45,810 - INFO - Loaded URL: https://stockanalysis.com/stocks/xom/
+2024-11-19 23:55:47,209 - INFO - 17 : XOM    - Exxon Mobil Corporation [Found]
+2024-11-19 23:55:53,973 - INFO - 17 : XOM    - Exxon Mobil Corporation [History Saved]
+2024-11-19 23:55:54,331 - INFO - Loaded URL: https://stockanalysis.com/stocks/ma/
+2024-11-19 23:55:55,743 - INFO - 18 : MA     - Mastercard Incorporated [Found]
+2024-11-19 23:56:02,541 - INFO - 18 : MA     - Mastercard Incorporated [History Saved]
+2024-11-19 23:56:02,873 - INFO - Loaded URL: https://stockanalysis.com/stocks/cost/
+2024-11-19 23:56:04,271 - INFO - 19 : COST   - Costco Wholesale Corporation [Found]
+2024-11-19 23:56:10,771 - INFO - 19 : COST   - Costco Wholesale Corporation [History Saved]
+2024-11-19 23:56:11,134 - INFO - Loaded URL: https://stockanalysis.com/stocks/hd/
+2024-11-19 23:56:12,716 - INFO - 20 : HD     - The Home Depot, Inc. [Found]
+2024-11-19 23:56:19,220 - INFO - 20 : HD     - The Home Depot, Inc. [History Saved]
+2024-11-19 23:56:19,575 - INFO - Loaded URL: https://stockanalysis.com/stocks/pg/
+2024-11-19 23:56:20,977 - INFO - 21 : PG     - The Procter & Gamble Company [Found]
+2024-11-19 23:56:27,679 - INFO - 21 : PG     - The Procter & Gamble Company [History Saved]
+2024-11-19 23:56:28,041 - INFO - Loaded URL: https://stockanalysis.com/stocks/nflx/
+2024-11-19 23:56:29,429 - INFO - 22 : NFLX   - Netflix, Inc. [Found]
+2024-11-19 23:56:35,996 - INFO - 22 : NFLX   - Netflix, Inc. [History Saved]
+2024-11-19 23:56:36,401 - INFO - Loaded URL: https://stockanalysis.com/stocks/jnj/
+2024-11-19 23:56:37,808 - INFO - 23 : JNJ    - Johnson & Johnson [Found]
+2024-11-19 23:56:45,869 - INFO - 23 : JNJ    - Johnson & Johnson [History Saved]
+2024-11-19 23:56:46,336 - INFO - Loaded URL: https://stockanalysis.com/stocks/bac/
+2024-11-19 23:56:47,726 - INFO - 24 : BAC    - Bank of America Corporation [Found]
+2024-11-19 23:56:54,255 - INFO - 24 : BAC    - Bank of America Corporation [History Saved]
+2024-11-19 23:56:54,535 - INFO - Loaded URL: https://stockanalysis.com/stocks/crm/
+2024-11-19 23:56:55,937 - INFO - 25 : CRM    - Salesforce, Inc. [Found]
+2024-11-19 23:57:02,378 - INFO - 25 : CRM    - Salesforce, Inc. [History Saved]
+2024-11-19 23:57:02,920 - INFO - Loaded URL: https://stockanalysis.com/stocks/abbv/
+2024-11-19 23:57:04,453 - INFO - 26 : ABBV   - AbbVie Inc. [Found]
+2024-11-19 23:57:11,290 - INFO - 26 : ABBV   - AbbVie Inc. [History Saved]
+2024-11-19 23:57:11,671 - INFO - Loaded URL: https://stockanalysis.com/stocks/cvx/
+2024-11-19 23:57:13,075 - INFO - 27 : CVX    - Chevron Corporation [Found]
+2024-11-19 23:57:20,044 - INFO - 27 : CVX    - Chevron Corporation [History Saved]
+2024-11-19 23:57:20,437 - INFO - Loaded URL: https://stockanalysis.com/stocks/tmus/
+2024-11-19 23:57:21,808 - INFO - 28 : TMUS   - T-Mobile US, Inc. [Found]
+2024-11-19 23:57:28,685 - INFO - 28 : TMUS   - T-Mobile US, Inc. [History Saved]
+2024-11-19 23:57:29,015 - INFO - Loaded URL: https://stockanalysis.com/stocks/ko/
+2024-11-19 23:57:30,561 - INFO - 29 : KO     - The Coca-Cola Company [Found]
+2024-11-19 23:57:37,194 - INFO - 29 : KO     - The Coca-Cola Company [History Saved]
+2024-11-19 23:57:37,583 - INFO - Loaded URL: https://stockanalysis.com/stocks/wfc/
+2024-11-19 23:57:39,017 - INFO - 30 : WFC    - Wells Fargo & Company [Found]
+2024-11-19 23:57:46,082 - INFO - 30 : WFC    - Wells Fargo & Company [History Saved]
+2024-11-19 23:57:46,441 - INFO - Loaded URL: https://stockanalysis.com/stocks/mrk/
+2024-11-19 23:57:47,850 - INFO - 31 : MRK    - Merck & Co., Inc. [Found]
+2024-11-19 23:57:54,728 - INFO - 31 : MRK    - Merck & Co., Inc. [History Saved]
+2024-11-19 23:57:55,144 - INFO - Loaded URL: https://stockanalysis.com/stocks/csco/
+2024-11-19 23:57:56,543 - INFO - 32 : CSCO   - Cisco Systems, Inc. [Found]
+2024-11-19 23:58:03,019 - INFO - 32 : CSCO   - Cisco Systems, Inc. [History Saved]
+2024-11-19 23:58:04,819 - INFO - Loaded URL: https://stockanalysis.com/stocks/amd/
+2024-11-19 23:58:06,200 - INFO - 33 : AMD    - Advanced Micro Devices, Inc. [Found]
+2024-11-19 23:58:12,671 - INFO - 33 : AMD    - Advanced Micro Devices, Inc. [History Saved]
+2024-11-19 23:58:13,041 - INFO - Loaded URL: https://stockanalysis.com/stocks/bx/
+2024-11-19 23:58:14,420 - INFO - 34 : BX     - Blackstone Inc. [Found]
+2024-11-19 23:58:21,001 - INFO - 34 : BX     - Blackstone Inc. [History Saved]
+2024-11-19 23:58:21,394 - INFO - Loaded URL: https://stockanalysis.com/stocks/acn/
+2024-11-19 23:58:22,788 - INFO - 35 : ACN    - Accenture plc [Found]
+2024-11-19 23:58:29,637 - INFO - 35 : ACN    - Accenture plc [History Saved]
+2024-11-19 23:58:30,052 - INFO - Loaded URL: https://stockanalysis.com/stocks/adbe/
+2024-11-19 23:58:31,530 - INFO - 36 : ADBE   - Adobe Inc. [Found]
+2024-11-19 23:58:38,301 - INFO - 36 : ADBE   - Adobe Inc. [History Saved]
+2024-11-19 23:58:38,589 - INFO - Loaded URL: https://stockanalysis.com/stocks/pep/
+2024-11-19 23:58:40,003 - INFO - 37 : PEP    - PepsiCo, Inc. [Found]
+2024-11-19 23:58:46,700 - INFO - 37 : PEP    - PepsiCo, Inc. [History Saved]
+2024-11-19 23:58:47,035 - INFO - Loaded URL: https://stockanalysis.com/stocks/ms/
+2024-11-19 23:58:48,415 - INFO - 38 : MS     - Morgan Stanley [Found]
+2024-11-19 23:58:55,327 - INFO - 38 : MS     - Morgan Stanley [History Saved]
+2024-11-19 23:58:55,759 - INFO - Loaded URL: https://stockanalysis.com/stocks/lin/
+2024-11-19 23:58:57,176 - INFO - 39 : LIN    - Linde plc [Found]
+2024-11-19 23:59:04,081 - INFO - 39 : LIN    - Linde plc [History Saved]
+2024-11-19 23:59:04,486 - INFO - Loaded URL: https://stockanalysis.com/stocks/now/
+2024-11-19 23:59:05,888 - INFO - 40 : NOW    - ServiceNow, Inc. [Found]
+2024-11-19 23:59:12,429 - INFO - 40 : NOW    - ServiceNow, Inc. [History Saved]
+2024-11-19 23:59:12,794 - INFO - Loaded URL: https://stockanalysis.com/stocks/mcd/
+2024-11-19 23:59:14,193 - INFO - 41 : MCD    - McDonald's Corporation [Found]
+2024-11-19 23:59:20,955 - INFO - 41 : MCD    - McDonald's Corporation [History Saved]
+2024-11-19 23:59:21,260 - INFO - Loaded URL: https://stockanalysis.com/stocks/dis/
+2024-11-19 23:59:22,655 - INFO - 42 : DIS    - The Walt Disney Company [Found]
+2024-11-19 23:59:29,446 - INFO - 42 : DIS    - The Walt Disney Company [History Saved]
+2024-11-19 23:59:29,779 - INFO - Loaded URL: https://stockanalysis.com/stocks/abt/
+2024-11-19 23:59:31,171 - INFO - 43 : ABT    - Abbott Laboratories [Found]
+2024-11-19 23:59:38,018 - INFO - 43 : ABT    - Abbott Laboratories [History Saved]
+2024-11-19 23:59:38,426 - INFO - Loaded URL: https://stockanalysis.com/stocks/pm/
+2024-11-19 23:59:39,808 - INFO - 44 : PM     - Philip Morris International Inc. [Found]
+2024-11-19 23:59:46,742 - INFO - 44 : PM     - Philip Morris International Inc. [History Saved]
+2024-11-19 23:59:47,037 - INFO - Loaded URL: https://stockanalysis.com/stocks/axp/
+2024-11-19 23:59:48,644 - INFO - 45 : AXP    - American Express Company [Found]
+2024-11-19 23:59:55,457 - INFO - 45 : AXP    - American Express Company [History Saved]
+2024-11-19 23:59:55,857 - INFO - Loaded URL: https://stockanalysis.com/stocks/tmo/
+2024-11-19 23:59:57,332 - INFO - 46 : TMO    - Thermo Fisher Scientific Inc. [Found]
+2024-11-20 00:00:04,487 - INFO - 46 : TMO    - Thermo Fisher Scientific Inc. [History Saved]
+2024-11-20 00:00:04,796 - INFO - Loaded URL: https://stockanalysis.com/stocks/ibm/
+2024-11-20 00:00:06,194 - INFO - 47 : IBM    - International Business Machines Corporation [Found]
+2024-11-20 00:00:12,872 - INFO - 47 : IBM    - International Business Machines Corporation [History Saved]
+2024-11-20 00:00:13,256 - INFO - Loaded URL: https://stockanalysis.com/stocks/ge/
+2024-11-20 00:00:14,679 - INFO - 48 : GE     - General Electric Company [Found]
+2024-11-20 00:00:21,527 - INFO - 48 : GE     - General Electric Company [History Saved]
+2024-11-20 00:00:37,018 - INFO - Loaded URL: https://stockanalysis.com/stocks/isrg/
+2024-11-20 00:00:38,441 - INFO - 49 : ISRG   - Intuitive Surgical, Inc. [Found]
+2024-11-20 00:00:45,726 - INFO - 49 : ISRG   - Intuitive Surgical, Inc. [History Saved]
+2024-11-20 00:00:46,204 - INFO - Loaded URL: https://stockanalysis.com/stocks/gs/
+2024-11-20 00:00:47,631 - INFO - 50 : GS     - The Goldman Sachs Group, Inc. [Found]
+2024-11-20 00:00:55,995 - INFO - 50 : GS     - The Goldman Sachs Group, Inc. [History Saved]
+2024-11-20 00:00:56,019 - INFO - Data saved to data/stock
