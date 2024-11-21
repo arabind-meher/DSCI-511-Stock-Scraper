@@ -1,6 +1,5 @@
-import time
+from pprint import pprint
 
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -15,25 +14,21 @@ if __name__ == "__main__":
     driver = webdriver.Firefox(options=firefox_options)
     driver.maximize_window()
 
-    # url = "https://www.nasdaq.com/market-activity/stocks/aapl"
-    # driver.get(url)
-
     try:
         # Navigate to the NASDAQ Apple stock page
         url = "https://www.nasdaq.com/market-activity/stocks/aapl"
         driver.get(url)
 
-        # Wait until the stock price element is present (up to 10 seconds)
-        price_element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(
-                (By.XPATH, '//div[@class="symbol-page-header__pricing-price"]')
-            )
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, "html"))
         )
-        stock_price = price_element.text
-        print(f"Stock Price: {stock_price}")
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
+        with open("nasdaq.html", "w", encoding="utf-8") as f:
+            f.write(driver.page_source)
+
+    except Exception as error:
+        print(error)
+
     finally:
-        # Close the browser
+        print("Closing Driver")
         driver.quit()

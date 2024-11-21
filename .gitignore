@@ -2,4 +2,5 @@ __pycache__/
 .venv/
 .vscode/
 test_data/
-stock_analysis_test.py
+nasdaq.py
+nasdaq.html
