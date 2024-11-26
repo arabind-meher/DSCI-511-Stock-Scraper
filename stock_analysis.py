@@ -72,7 +72,7 @@ class StockAnalysisScraper:
         if not os.path.exists(directory):
             os.mkdir(directory)
 
-        history_directory = os.path.join(directory, "stock_history")
+        history_directory = os.path.join(directory, "historical_data")
         if not os.path.exists(history_directory):
             os.mkdir(history_directory)
 

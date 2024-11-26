@@ -11,6 +11,6 @@ if __name__ == "__main__":
 
     stock_scraper = StockAnalysisScraper(browser)
     links = stock_scraper.get_snp500_list()
-    stock_df = stock_scraper.get_stock_data(links[:50])
+    stock_df = stock_scraper.get_stock_data(links[:10])
 
     browser.quit()
