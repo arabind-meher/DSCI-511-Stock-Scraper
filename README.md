@@ -1,135 +1,202 @@
-DSCI 511 Final Project - Stock Data Scraper and Analysis
+# Stock Scraper
 
-Project Overview
+Group Z:
+- Arabind Meher
+- Neel Patel
+- Sayali Sanjay Chougule
+- Ameen Aghazadeh
 
-This project provides a toolset for scraping and analyzing stock market data using Python. The project leverages Selenium for web scraping and includes various utilities for logging, data parsing, and stock analysis. The tools are designed to extract stock information from public websites like Nasdaq and provide detailed analytics, such as historical stock performance and company profiles.
+---
 
-Features
+## Table of Contents
 
-Scrape Stock Data:
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Setup Instructions](#setup-instructions)
+5. [Usage Guide](#usage-guide)
+6. [Project Structure](#project-structure)
+7. [Challenges Scraping Stock Websites](#challenges-scraping-stock-websites)
+8. [Future Enhancements](#future-enhancements)
+9. [Acknowledgments](#acknowledgments)
 
-Retrieves data from the Nasdaq website and S&P 500 stock list.
+---
 
-Collects detailed stock information including symbol, price, industry, sector, IPO date, employees, and more.
+## Overview
 
-Historical Data Analysis:
+The Stock Scraper project is a comprehensive tool designed to automate the process of collecting and managing stock data for companies in the S&P 500 index. By leveraging Selenium WebDriver, the scraper efficiently extracts real-time stock details, historical data, and additional financial metrics for analysis and research purposes.
 
-Downloads and saves historical stock data as CSV files for further analysis.
+With the ability to collect 28 detailed fields per stock and historical data for the last 100 days, this project simplifies the process of acquiring stock information while ensuring data integrity and accessibility. The scraper has processed over 50,000 lines of data, combining detailed stock metrics and historical performance across all S&P 500 companies. The saved data can serve as a foundation for financial studies, predictions, and more.
 
-Logging:
+---
 
-Comprehensive logging for debugging and monitoring, including both file-based and console-based logs.
+## Features
 
-Headless Browsing:
+1. **Initialization and Setup**:
+   - The scraper initializes by loading required dependencies, setting up the Selenium WebDriver, and defining logging configurations.
 
-Utilizes Selenium's headless mode for efficient and resource-saving browsing.
+2. **Real-Time Data Scraping**:
+   - Extracts data fields such as symbol, name, price, market capitalization, EPS, PE ratio, dividend information, and more from the website.
+   - Saves the real-time data in CSV format.
 
-Files and Structure
+3. **Historical Data Retrieval**:
+   - Collects the last 100 days of historical stock data for each company, including fields like date, open, high, low, close, adjusted close, change, and volume.
+   - Data is processed and saved in CSV format.
 
-main.py
+4. **Logging and Debugging**:
+   - Detailed logs are generated throughout the execution to monitor progress and debug issues.
 
-Entry point of the project.
+5. **Final Output**:
+   - All scraped data is organized and stored in the `data/` directory for easy access and further analysis.
 
-Initializes the Firefox WebDriver and scrapes data from the S&P 500 stocks list.
+---
 
-nasdaq.py
+## Technologies Used
 
-Contains functions for scraping Nasdaq stock data and parsing HTML content.
+- **Python**: The core programming language used to write the scraper, providing versatility and powerful libraries for data manipulation and automation.
 
-Saves raw HTML content and displays stock name and price in a formatted table.
+- **Selenium WebDriver**: A browser automation tool that enables interaction with web pages. Selenium allows the scraper to navigate dynamic content, handle JavaScript, and extract data effectively from stock market websites.
 
-stock_analysis.py
+- **Pandas**: A data analysis and manipulation library in Python. It is used to clean, process, and store the scraped data efficiently in tabular formats like CSV.
 
-Implements the StockAnalysisScraper class.
+- **Firefox WebDriver**: The browser driver for Firefox that serves as the interface between the scraper and the browser. It is used to render web pages and execute scraping scripts. Other WebDrivers can also be used, such as ChromeDriver, with minor configuration changes.
 
-Includes methods for fetching S&P 500 stock list, retrieving stock details, and processing historical data.
+---
 
-logger.py
+## Setup Instructions
 
-Provides logging utilities using Python's logging library.
+### Prerequisites
 
-Includes a file-based logger and a console logger compatible with progress bars.
+1. **Python 3.x**: Ensure you have Python installed. [Download Python](https://www.python.org/downloads/)
+2. **Pip**: Package manager for Python.
+3. Libraries used:
+   ```bash
+   beautifulsoup4==4.12.3
+   lxml==5.3.0
+   pandas==2.2.3
+   selenium==4.26.1
+   tqdm==4.67.0
+   ```
 
-Installation
+### Clone the Repository
 
-Clone the repository to your local machine.
+```bash
+git clone https://github.com/arabind-meher/DSCI-511-Stock-Scraper.git
+cd DSCI-511-Stock-Scraper
+```
 
-git clone <repository-url>
-cd <repository-directory>
+### Install Dependencies
 
-Install dependencies:
+Use the following command to install all required Python libraries:
 
+```bash
 pip install -r requirements.txt
+```
 
-Ensure that Firefox and the corresponding geckodriver are installed and added to your system's PATH.
+---
 
-Usage
+## Usage Guide
 
-Running the Project
+1. **Set Up WebDriver**:
+   - Download and configure the WebDriver compatible with your browser (e.g., Firefox GeckoDriver or ChromeDriver).
+   - Place the WebDriver in a directory included in your system PATH.
 
-To scrape S&P 500 stock data, run the main.py script:
+2. **Run the Scraper**:
+   - Execute the main script to scrape stock data:
+   ```bash
+   python main.py
+   ```
 
-python main.py
+3. **View Real-Time Data**:
+   - Extracted real-time stock data will be saved in the `data/` directory as CSV files. Each file contains 28 fields of stock details.
 
-To scrape and analyze a specific Nasdaq stock, run the nasdaq.py script:
+4. **Access Historical Data**:
+   - Historical stock data (last 100 days) is saved in CSV format, with a separate file for each stock, within the `data/` directory.
 
-python nasdaq.py
+5. **Monitor Logs**:
+   - Detailed logs are maintained in the `logs/` directory. Use these for tracking the scraper's progress and troubleshooting any issues.
 
-Outputs
+6. **Customize Settings**:
+   - Modify the script as needed to adjust the number of historical days or the stock fields being scraped.
 
-Scraped stock data is saved in a data/ directory as CSV files.
+---
 
-Logs are stored in the logs/ directory.
+## Project Structure
 
-Dependencies
+```plaintext
+DSCI-511-Stock-Scraper/
+|
+├── data/                    # Directory for storing scraped data
+    ├── historical_data/     # Subdirectory for historical stock data
+        ├── A.csv            # Historical data for stock A (Agilent Technologies)
+        ├── AAPL.csv         # Historical data for stock AAPL (Apple)
+        ├── ABBV.csv         # Historical data for stock ABBV (AbbVie)
+        ├── ...              # Historical data for other stocks
+    ├── stock.csv            # Consolidated real-time stock data
+├── logs/                    # Directory for storing logs
+├── logger.py                # Logging functionality
+├── main.py                  # Main script to run the scraper
+├── nasdaq.py                # NASDAQ-specific scraping functions
+├── stock_analysis.py        # StockAnalysisScraper class implementation
+├── utils.py                 # Utility functions (e.g., saving data locally)
+├── requirements.txt         # Python dependencies
+└── README.md                # Project documentation (this file)
+```
 
-Python 3.7+
+---
 
-Selenium
+## Challenges Scraping Stock Websites
 
-BeautifulSoup4
+### Nasdaq
+Nasdaq posed significant challenges for data extraction due to its use of JavaScript to dynamically render HTML content. The structure of the HTML differed each time the page was loaded, making it unreliable for consistent scraping. Additionally, rate-limiting measures made it difficult to extract large volumes of data without delays or errors.
 
-pandas
+### TradingView
+Access to data on TradingView was restricted due to security concerns. These restrictions prevented automated scripts from interacting with the website effectively, resulting in blocked requests and incomplete data retrieval.
 
-tqdm
+### Yahoo Finance
+Yahoo Finance presented challenges due to its outdated structure and slow loading times. These inefficiencies caused delays in data collection and required additional retries, making the process less efficient for large-scale data scraping efforts.
 
-geckodriver (for Selenium WebDriver)
+### Why These Issues Occur
+Dynamic websites often generate content after the initial page load, requiring additional handling for JavaScript execution. Security restrictions and outdated web structures further complicate data extraction efforts.
 
-Project Workflow
+---
 
-Initialize WebDriver:
+## Future Enhancements
 
-Set up a headless Firefox browser instance.
+### Expansion to Additional Data Sources
+- Integrate more reliable and diverse stock market data sources to improve data coverage and accuracy.
+- Incorporate APIs from established providers like Alpha Vantage or Quandl to avoid reliance on scraping dynamic websites.
 
-Load target URLs for scraping.
+### Advanced Data Processing
+- Implement advanced preprocessing techniques, such as handling missing values and outliers, to improve data quality.
+- Develop mechanisms for real-time updates of stock data for enhanced analysis and predictions.
 
-Scrape Data:
+### Improved Automation and Scalability
+- Enable multi-threaded scraping to reduce execution time for large-scale data retrieval.
+- Add support for cloud-based scraping tools to manage extensive workloads.
 
-Extract stock data from tables and detailed information pages.
+### Enhanced User Accessibility
+- Create an intuitive GUI for users to interact with the scraper, configure settings, and view results.
+- Provide options for exporting data in additional formats, such as JSON and Excel, for better usability.
 
-Save Outputs:
+### Robust Error Handling and Logging
+- Enhance error handling to address dynamic website issues, such as timeouts or unexpected element changes.
+- Improve logging to include detailed diagnostic information for easier debugging.
 
-Save scraped data as structured CSV files.
+### Data Analysis and Visualization
+- Develop built-in tools for basic data analysis, such as trend detection and performance comparisons.
+- Incorporate visualization features to present key stock insights in charts and graphs.
 
-Log Events:
+---
 
-Record progress and errors in log files for troubleshooting.
+## Acknowledgments
 
-Future Enhancements
+We would like to express our heartfelt gratitude to everyone who contributed to the success of this project:
 
-Add support for additional stock exchanges and regions.
+- **Professor Pragati Awasthi**: For her invaluable guidance and support throughout the project development process.
+- **Group Members**: For their teamwork, dedication, and hard work in tackling challenges and achieving the project goals.
+- **Open-Source Community**: For providing access to tools, libraries, and resources such as Selenium, Pandas, and others that made this project possible.
+- **Course Organizers**: For designing a curriculum that inspired innovative thinking and problem-solving.
 
-Implement data visualization for stock trends.
-
-Enhance error handling for dynamic web content.
-
-Incorporate parallel processing for faster data scraping.
-
-Contributors
-
-[Your Name/Team Name]
-
-University of British Columbia
-
-Course: DSCI 511
+This project would not have been possible without the collaborative effort and shared vision of everyone involved. Thank you for making it a success!
 
