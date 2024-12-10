@@ -1,4 +1,4 @@
-# Stock Scraper
+# Analysis and Extraction of Stock Data (S&P 500 Index)
 
 Group Z:
 - Arabind Meher
